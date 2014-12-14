@@ -13,7 +13,7 @@ all: bootloader kernel link
 
 # Boot the kernel!
 start:
-	qemu-system-arm -kernel build/popos.img
+	qemu-system-arm  -M vexpress-a9 -cpu cortex-a9 -kernel build/popos.img
 
 # All of our object files, images, and executables will be stored here.
 build:
@@ -22,7 +22,7 @@ build:
 # This is the bootloader. We need to assemble it into an object file  we can 
 # link against.
 bootloader: build
-	$(AS) kernel/boot.s -o build/boot.o
+	$(AS) kernel/boot.S -o build/boot.o
 
 # Build the kernel.
 kernel: build
@@ -30,7 +30,7 @@ kernel: build
 
 # Link it all together into a single image
 link: build
-	$(CC) -T kernel/linker.ld -o build/popos.img $(LDFLAGS)
+	$(CC) -T kernel/linker.ld build/boot.o build/kernel.o -o build/popos.img $(LDFLAGS)
 
 # This is how we write to the screen
 terminal: build
