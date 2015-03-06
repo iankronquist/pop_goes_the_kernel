@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TARGET=arm-none-eabi
+TARGET=i686-elf
 PREFIX=$(pwd)/compiler/$TARGET
 PATH=$PATH:$PREFIX/bin
 CFLAGS=" -g -O2"
@@ -11,7 +11,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	alias CC=gcc
 	alias CXX=g++
 fi
-echo 'Nuking ./compiler/build and ./compiler/arm and recreating directories'
+echo "Nuking ./compiler/build and ./compiler/$TARGET and recreating directories"
 rm -rf compiler/build
 rm -rf compiler/$TARGET
 mkdir -p compiler/build
