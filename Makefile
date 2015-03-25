@@ -25,12 +25,16 @@ bootloader: build
 	$(AS) kernel/boot.S -o build/boot.o
 
 # Build the kernel.
-kernel: build vga_driver
+kernel: build vga_driver gdt
 	$(CC) -c kernel/kernel.c -o build/kernel.o  $(CFLAGS)
+
+gdt:
+	$(CC) -c kernel/gdt.c -o build/gdt.o $(CFLAGS)
+	$(AS) -c kernel/gdt.s -o build/gdt_s.o $(ASFLAGS)
 
 # Link it all together into a single image
 link: build
-	$(CC) -T kernel/linker.ld build/vga_driver.o build/boot.o build/kernel.o -o build/popos.img $(LDFLAGS)
+	$(CC) -T kernel/linker.ld build/gdt.o build/gdt_s.o build/vga_driver.o build/boot.o build/kernel.o -o build/popos.img $(LDFLAGS)
 
 # This is how we write to the screen
 vga_driver: build
