@@ -7,5 +7,4 @@ void kernel_main() {
     vga_putstr("Loading GDT...\n");
     setup_gdt();
     vga_putstr("Done!\n");
-    print_gdt();
 }
