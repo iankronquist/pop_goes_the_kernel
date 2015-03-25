@@ -48,7 +48,7 @@ What Do I Need to Get Started?
 We will start by running the kernel in a virtual machine.
 
 * I'm going to install you're running Ubuntu or something similar.
-  You can do all of this on any system including a Mac or
+  You can in theory do all of this on any system including a Mac or
   (if you are very brave) Windows with Cygwin.
 * I'm going to assume you know some C or C++. Maybe you can write a program
   which fills a linked list with the first 100 Fibonacci numbers.
