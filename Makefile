@@ -5,7 +5,8 @@ CC=compiler/$(TARGET)/bin/$(TARGET)-gcc
 # This is the path to our assembler
 AS=compiler/$(TARGET)/bin/$(TARGET)-as
 # Here are the flags for our C Compiler
-CFLAGS= -std=c99 -ffreestanding -O2 -Wall -Wextra -fdiagnostics-color=auto
+CFLAGS= -std=c99 -ffreestanding -O0 -Wall -Wextra -fdiagnostics-color=auto
+ASFLAGS=
 # These are the flags for the linking step
 LDFLAGS= -lgcc -O2 -ffreestanding -nostdlib -fdiagnostics-color=auto
 
