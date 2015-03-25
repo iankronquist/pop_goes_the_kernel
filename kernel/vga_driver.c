@@ -24,20 +24,26 @@ void vga_initialize() {
     vga_buffer[1] = make_vga_entry('i', make_color(COLOR_GREEN, COLOR_BLACK));
 }
 
-int vga_putchar(int c) {
-   uint8_t text_color =  make_color(COLOR_GREEN, COLOR_BLACK);
-   vga_buffer[cursor_row * VGA_WIDTH + cursor_col] = make_vga_entry(c, text_color);
-   cursor_col++;
-   if (cursor_col > VGA_WIDTH) {
-        cursor_col = 0;
+int vga_putchar(char c) {
+    if (c == '\n') {
         cursor_row++;
-        // FIXME: write a function to push lines up the screen
-        if (cursor_row > VGA_HEIGHT) {
-            vga_initialize();
-            cursor_row = 0;
-        }
-   }
-   return c;
+        cursor_col = 0;
+        return c;
+    }
+    uint8_t text_color = make_color(COLOR_GREEN, COLOR_BLACK);
+    vga_buffer[cursor_row * VGA_WIDTH + cursor_col] = make_vga_entry(c, text_color);
+    cursor_col++;
+    if (cursor_col > VGA_WIDTH) {
+         cursor_col = 0;
+         cursor_row++;
+         // FIXME: write a function to push lines up the screen
+         /*
+         if (cursor_row > VGA_HEIGHT) {
+             vga_initialize();
+             cursor_row = 0;
+         }*/
+    }
+    return c;
 }
 
 int vga_putstr(char* data) {
