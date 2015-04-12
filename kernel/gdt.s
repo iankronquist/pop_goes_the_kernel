@@ -4,12 +4,18 @@
 
 .global load_gdt
 
-.extern gdt_data
+.extern gdtp
 
 load_gdt:
-	cli;
-	mov eax, [ebp+8]
-	lgdt [eax];
-	sti;
+	lgdt [gdtp];
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax
+	jmp 0x08:enter_new_segment
+
+enter_new_segment:
 	ret;
 

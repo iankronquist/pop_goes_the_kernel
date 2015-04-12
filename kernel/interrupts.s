@@ -1,0 +1,315 @@
+.intel_syntax noprefix
+
+.extern generic_interrupt
+.global common_handler
+
+.macro interrupt number
+	.global interrupt_handler_\number
+	interrupt_handler_\number:
+		push \number
+		jmp common_handler
+
+.endm
+
+.macro no_error_code_interrupt number
+	.global no_error_code_interrupt_handler_\number
+	no_error_code_interrupt_handler_\number:
+		push 0
+		push dword \number
+		jmp common_handler
+
+.endm
+
+
+common_handler:
+	cli
+	push eax
+	push ebx
+	push ecx
+	push edx
+	push esi
+	push edi
+	push esp
+	push ebp
+	call generic_interrupt
+	pop ebp
+	pop esp
+	pop edi
+	pop esi
+	pop edx
+	pop ecx
+	pop ebx
+	pop eax
+	add esp, 8
+	sti
+	iret
+
+loop:
+	jmp loop
+
+.global interrupt_handler_7
+interrupt_handler_7:
+	push 7
+	jmp common_handler
+
+
+
+
+
+#kno_error_code_interrupt 0
+#kno_error_code_interrupt 1
+#kno_error_code_interrupt 2
+#kno_error_code_interrupt 3
+#kno_error_code_interrupt 4
+#kno_error_code_interrupt 5
+#kno_error_code_interrupt 6
+#k
+#kinterrupt 7
+#kinterrupt 8
+#kinterrupt 9
+#kinterrupt 10
+#kinterrupt 11
+#kinterrupt 12
+#kinterrupt 13
+#kinterrupt 14
+#kinterrupt 15
+#kinterrupt 16
+#kinterrupt 17
+#kinterrupt 18
+#kinterrupt 19
+#kinterrupt 20
+#kinterrupt 21
+#kinterrupt 22
+#kinterrupt 23
+#kinterrupt 24
+#kinterrupt 25
+#kinterrupt 26
+#kinterrupt 27
+#kinterrupt 28
+#kinterrupt 29
+#kinterrupt 30
+#kinterrupt 31
+#kinterrupt 32
+#kinterrupt 33
+#kinterrupt 34
+#kinterrupt 35
+#kinterrupt 36
+#kinterrupt 37
+#kinterrupt 38
+#kinterrupt 39
+#kinterrupt 40
+#kinterrupt 41
+#kinterrupt 42
+#kinterrupt 43
+#kinterrupt 44
+#kinterrupt 45
+#kinterrupt 46
+#kinterrupt 47
+#kinterrupt 48
+#kinterrupt 49
+#kinterrupt 50
+#kinterrupt 51
+#kinterrupt 52
+#kinterrupt 53
+#kinterrupt 54
+#kinterrupt 55
+#kinterrupt 56
+#kinterrupt 57
+#kinterrupt 58
+#kinterrupt 59
+#kinterrupt 60
+#kinterrupt 61
+#kinterrupt 62
+#kinterrupt 63
+#kinterrupt 64
+#kinterrupt 65
+#kinterrupt 66
+#kinterrupt 67
+#kinterrupt 68
+#kinterrupt 69
+#kinterrupt 70
+#kinterrupt 71
+#kinterrupt 72
+#kinterrupt 73
+#kinterrupt 74
+#kinterrupt 75
+#kinterrupt 76
+#kinterrupt 77
+#kinterrupt 78
+#kinterrupt 79
+#kinterrupt 80
+#kinterrupt 81
+#kinterrupt 82
+#kinterrupt 83
+#kinterrupt 84
+#kinterrupt 85
+#kinterrupt 86
+#kinterrupt 87
+#kinterrupt 88
+#kinterrupt 89
+#kinterrupt 90
+#kinterrupt 91
+#kinterrupt 92
+#kinterrupt 93
+#kinterrupt 94
+#kinterrupt 95
+#kinterrupt 96
+#kinterrupt 97
+#kinterrupt 98
+#kinterrupt 99
+#kinterrupt 100
+#kinterrupt 101
+#kinterrupt 102
+#kinterrupt 103
+#kinterrupt 104
+#kinterrupt 105
+#kinterrupt 106
+#kinterrupt 107
+#kinterrupt 108
+#kinterrupt 109
+#kinterrupt 110
+#kinterrupt 111
+#kinterrupt 112
+#kinterrupt 113
+#kinterrupt 114
+#kinterrupt 115
+#kinterrupt 116
+#kinterrupt 117
+#kinterrupt 118
+#kinterrupt 119
+#kinterrupt 120
+#kinterrupt 121
+#kinterrupt 122
+#kinterrupt 123
+#kinterrupt 124
+#kinterrupt 125
+#kinterrupt 126
+#kinterrupt 127
+#kinterrupt 128
+#kinterrupt 129
+#kinterrupt 130
+#kinterrupt 131
+#kinterrupt 132
+#kinterrupt 133
+#kinterrupt 134
+#kinterrupt 135
+#kinterrupt 136
+#kinterrupt 137
+#kinterrupt 138
+#kinterrupt 139
+#kinterrupt 140
+#kinterrupt 141
+#kinterrupt 142
+#kinterrupt 143
+#kinterrupt 144
+#kinterrupt 145
+#kinterrupt 146
+#kinterrupt 147
+#kinterrupt 148
+#kinterrupt 149
+#kinterrupt 150
+#kinterrupt 151
+#kinterrupt 152
+#kinterrupt 153
+#kinterrupt 154
+#kinterrupt 155
+#kinterrupt 156
+#kinterrupt 157
+#kinterrupt 158
+#kinterrupt 159
+#kinterrupt 160
+#kinterrupt 161
+#kinterrupt 162
+#kinterrupt 163
+#kinterrupt 164
+#kinterrupt 165
+#kinterrupt 166
+#kinterrupt 167
+#kinterrupt 168
+#kinterrupt 169
+#kinterrupt 170
+#kinterrupt 171
+#kinterrupt 172
+#kinterrupt 173
+#kinterrupt 174
+#kinterrupt 175
+#kinterrupt 176
+#kinterrupt 177
+#kinterrupt 178
+#kinterrupt 179
+#kinterrupt 180
+#kinterrupt 181
+#kinterrupt 182
+#kinterrupt 183
+#kinterrupt 184
+#kinterrupt 185
+#kinterrupt 186
+#kinterrupt 187
+#kinterrupt 188
+#kinterrupt 189
+#kinterrupt 190
+#kinterrupt 191
+#kinterrupt 192
+#kinterrupt 193
+#kinterrupt 194
+#kinterrupt 195
+#kinterrupt 196
+#kinterrupt 197
+#kinterrupt 198
+#kinterrupt 199
+#kinterrupt 200
+#kinterrupt 201
+#kinterrupt 202
+#kinterrupt 203
+#kinterrupt 204
+#kinterrupt 205
+#kinterrupt 206
+#kinterrupt 207
+#kinterrupt 208
+#kinterrupt 209
+#kinterrupt 210
+#kinterrupt 211
+#kinterrupt 212
+#kinterrupt 213
+#kinterrupt 214
+#kinterrupt 215
+#kinterrupt 216
+#kinterrupt 217
+#kinterrupt 218
+#kinterrupt 219
+#kinterrupt 220
+#kinterrupt 221
+#kinterrupt 222
+#kinterrupt 223
+#kinterrupt 224
+#kinterrupt 225
+#kinterrupt 226
+#kinterrupt 227
+#kinterrupt 228
+#kinterrupt 229
+#kinterrupt 230
+#kinterrupt 231
+#kinterrupt 232
+#kinterrupt 233
+#kinterrupt 234
+#kinterrupt 235
+#kinterrupt 236
+#kinterrupt 237
+#kinterrupt 238
+#kinterrupt 239
+#kinterrupt 240
+#kinterrupt 241
+#kinterrupt 242
+#kinterrupt 243
+#kinterrupt 244
+#kinterrupt 245
+#kinterrupt 246
+#kinterrupt 247
+#kinterrupt 248
+#kinterrupt 249
+#kinterrupt 250
+#kinterrupt 251
+#kinterrupt 252
+#kinterrupt 253
+#kinterrupt 254
+#kinterrupt 255
