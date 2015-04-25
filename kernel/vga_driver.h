@@ -28,12 +28,12 @@ static const size_t VGA_HEIGHT = 24;
 static const size_t VGA_WIDTH = 80;
 
 
-static size_t cursor_col;
-static size_t cursor_row;
-static uint16_t* vga_buffer;
+size_t cursor_col;
+size_t cursor_row;
+uint16_t* vga_buffer;
 
-int vga_write_string(char* data);
 int vga_putchar(int c);
+int vga_putstr(char* data);
 void vga_initialize();
 uint16_t make_vga_entry(char c, uint8_t color);
 uint8_t make_color(enum vga_color fg, enum vga_color bg);
