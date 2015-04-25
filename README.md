@@ -5,7 +5,6 @@ This is an introduction to writing a simple kernel for x86
 
 Talk Description
 ----------------
-
 Ever wanted to build a simple kernel for a small computer? Curious how an OS
 starts and how it communicates with your keyboard and screen? Together, we'll
 build a simple kernel from scratch. No experience in assembly language or
@@ -32,4 +31,28 @@ This session will be hands on – we get to take a look at a toy kernel, boot it
 watch it work and watch it fail. We’ll learn about hardware, low-level
 software, and algorithms for multitasking and paging.
 
+Building this kernel
+--------------------
+First you'll probably need to build the x86 cross compiler, although your
+distro may provide one. Luckily, I made a
+script to do this for you, but it's pretty slow to fetch all of GCC's
+dependencies and compile them.
+```sh
+$ sh scripts/build_cross_compiler.sh
+```
+This will build a GCC cross compiler for x86.
 
+Next, you'll need to be able to run this kernel. We'll need qemu, a program
+used for starting virtual machines. On an ubuntu like system, run
+```sh
+$ sudo apt-get install qemu
+```
+
+Finally we can actually build and run the kernel!
+```sh
+$ make
+$ make run
+```
+
+qemu will open in a new window and the kernel will print "Hello kernel!" This
+is a great way to get started.
