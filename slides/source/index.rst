@@ -103,7 +103,7 @@ Different Kernel Architectures
 
 There are three types of Kernel architectures.
 
-* Micokernel
+* Microkernel
     - Runs drivers in userspace.
 	- Task switching between userspace and kernel mode is expensive.
 	- Examples: Various embedded kernels you've never heard of.
