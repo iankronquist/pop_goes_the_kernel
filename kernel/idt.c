@@ -4,7 +4,9 @@
 
 //void generic_interrupt(struct cpu_state cpu, struct stack_state stack,
 //                       unsigned int interrupt) {
-void generic_interrupt(struct registers, unsigned int interrupt) {
+//void generic_interrupt(struct registers regs, unsigned int interrupt) {
+void generic_interrupt(struct registers regs, unsigned int interrupt) {
+//void generic_interrupt(unsigned int interrupt) {
     vga_putstr("Interrupt caught!");
 }
 

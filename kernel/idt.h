@@ -53,7 +53,8 @@ struct idt_ptr idtp;
 
 //void generic_interrupt(struct cpu_state cpu, struct stack_state stack,
 //                       unsigned int interrupt);
-void generic_interrupt(unsigned int interrupt);
+void generic_interrupt(struct registers regs, unsigned int interrupt);
+//void generic_interrupt(unsigned int interrupt);
 void setup_idt();
 void set_interrupts();
 void idt_set_gate(unsigned char entry, void (*interrupt_base)(void),
