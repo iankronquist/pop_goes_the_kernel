@@ -5,7 +5,7 @@ CC=compiler/$(TARGET)/bin/$(TARGET)-gcc
 # This is the path to our assembler
 AS=compiler/$(TARGET)/bin/$(TARGET)-as
 # Here are the flags for our C Compiler
-CFLAGS= -std=c99 -ffreestanding -O0 -Wall -Wextra -fdiagnostics-color=auto -ggdb
+CFLAGS= -std=c99 -ffreestanding -O0 -Wall -Wextra -fdiagnostics-color=auto -ggdb -g
 ASFLAGS=
 # These are the flags for the linking step
 LDFLAGS= -lgcc -O2 -ffreestanding -nostdlib -fdiagnostics-color=auto
@@ -18,6 +18,9 @@ start:
 
 start-log:
 	qemu-system-i386 -kernel build/popos.img -d in_asm,cpu_reset,exec,int,op,guest_errors,pcall     -no-reboot 2> qemu.log
+
+start-debug:
+	qemu-system-i386 -S -s -kernel build/popos.img
 
 # All of our object files, images, and executables will be stored here.
 build:
