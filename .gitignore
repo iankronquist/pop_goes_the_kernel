@@ -1,0 +1,8 @@
+# Ignore source code and binaries used for cross compilation
+compiler
+
+# Ignore generated files for running vagrant VMs
+.vagrant
+
+# Ignore vim swap files
+.*.sw[a-z]
