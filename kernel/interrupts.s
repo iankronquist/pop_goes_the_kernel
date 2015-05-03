@@ -8,7 +8,6 @@
 	interrupt_handler_\number:
 		push \number
 		jmp common_handler
-		add esp, 4
 
 .endm
 
@@ -18,7 +17,6 @@
 		push 0
 		push \number
 		jmp common_handler
-		add esp, 8
 .endm
 
 
@@ -30,7 +28,18 @@ common_handler:
 	push fs
 	push gs
 
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax
+
+	mov eax, esp
+	push eax
+
 	call generic_interrupt
+	pop eax
 
 	pop gs
 	pop fs
