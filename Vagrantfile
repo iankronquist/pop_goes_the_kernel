@@ -6,4 +6,5 @@ Vagrant.configure("2") do |c|
   c.vm.synced_folder ".", "/home/vagrant/project"
   c.vm.provider :virtualbox do |p|
   end
+  c.vm.provision "shell", path: 'scripts/provision_vagrant.sh'
 end
