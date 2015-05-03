@@ -6,3 +6,6 @@ compiler
 
 # Ignore vim swap files
 .*.sw[a-z]
+
+# Ignore destination for binaries and object files
+build
