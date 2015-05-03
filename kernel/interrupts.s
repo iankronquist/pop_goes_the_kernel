@@ -8,6 +8,7 @@
 	interrupt_handler_\number:
 		push \number
 		jmp common_handler
+		add esp, 4
 
 .endm
 
@@ -15,301 +16,299 @@
 	.global no_error_code_interrupt_handler_\number
 	no_error_code_interrupt_handler_\number:
 		push 0
-		push dword \number
+		push \number
 		jmp common_handler
-
+		add esp, 8
 .endm
 
 
 common_handler:
 	cli
-	push eax
-	push ebx
-	push ecx
-	push edx
-	push esi
-	push edi
-	push esp
-	push ebp
+	pusha
+	push ds
+	push es
+	push fs
+	push gs
+
 	call generic_interrupt
-	pop ebp
-	pop esp
-	pop edi
-	pop esi
-	pop edx
-	pop ecx
-	pop ebx
-	pop eax
-	add esp, 8
+
+	pop gs
+	pop fs
+	pop es
+	pop ds
+	popa
 	sti
 	iret
 
 loop:
 	jmp loop
 
-.global interrupt_handler_7
-interrupt_handler_7:
+.global interrupt_handler_any
+interrupt_handler_any:
 	push 7
 	jmp common_handler
 
+.global no_error_code_interrupt_handler_any
+no_error_code_interrupt_handler_any:
+	push 0
+	push 8
+	jmp common_handler
 
 
+no_error_code_interrupt 0
+no_error_code_interrupt 1
+no_error_code_interrupt 2
+no_error_code_interrupt 3
+no_error_code_interrupt 4
+no_error_code_interrupt 5
+no_error_code_interrupt 6
 
-
-#kno_error_code_interrupt 0
-#kno_error_code_interrupt 1
-#kno_error_code_interrupt 2
-#kno_error_code_interrupt 3
-#kno_error_code_interrupt 4
-#kno_error_code_interrupt 5
-#kno_error_code_interrupt 6
-#k
-#kinterrupt 7
-#kinterrupt 8
-#kinterrupt 9
-#kinterrupt 10
-#kinterrupt 11
-#kinterrupt 12
-#kinterrupt 13
-#kinterrupt 14
-#kinterrupt 15
-#kinterrupt 16
-#kinterrupt 17
-#kinterrupt 18
-#kinterrupt 19
-#kinterrupt 20
-#kinterrupt 21
-#kinterrupt 22
-#kinterrupt 23
-#kinterrupt 24
-#kinterrupt 25
-#kinterrupt 26
-#kinterrupt 27
-#kinterrupt 28
-#kinterrupt 29
-#kinterrupt 30
-#kinterrupt 31
-#kinterrupt 32
-#kinterrupt 33
-#kinterrupt 34
-#kinterrupt 35
-#kinterrupt 36
-#kinterrupt 37
-#kinterrupt 38
-#kinterrupt 39
-#kinterrupt 40
-#kinterrupt 41
-#kinterrupt 42
-#kinterrupt 43
-#kinterrupt 44
-#kinterrupt 45
-#kinterrupt 46
-#kinterrupt 47
-#kinterrupt 48
-#kinterrupt 49
-#kinterrupt 50
-#kinterrupt 51
-#kinterrupt 52
-#kinterrupt 53
-#kinterrupt 54
-#kinterrupt 55
-#kinterrupt 56
-#kinterrupt 57
-#kinterrupt 58
-#kinterrupt 59
-#kinterrupt 60
-#kinterrupt 61
-#kinterrupt 62
-#kinterrupt 63
-#kinterrupt 64
-#kinterrupt 65
-#kinterrupt 66
-#kinterrupt 67
-#kinterrupt 68
-#kinterrupt 69
-#kinterrupt 70
-#kinterrupt 71
-#kinterrupt 72
-#kinterrupt 73
-#kinterrupt 74
-#kinterrupt 75
-#kinterrupt 76
-#kinterrupt 77
-#kinterrupt 78
-#kinterrupt 79
-#kinterrupt 80
-#kinterrupt 81
-#kinterrupt 82
-#kinterrupt 83
-#kinterrupt 84
-#kinterrupt 85
-#kinterrupt 86
-#kinterrupt 87
-#kinterrupt 88
-#kinterrupt 89
-#kinterrupt 90
-#kinterrupt 91
-#kinterrupt 92
-#kinterrupt 93
-#kinterrupt 94
-#kinterrupt 95
-#kinterrupt 96
-#kinterrupt 97
-#kinterrupt 98
-#kinterrupt 99
-#kinterrupt 100
-#kinterrupt 101
-#kinterrupt 102
-#kinterrupt 103
-#kinterrupt 104
-#kinterrupt 105
-#kinterrupt 106
-#kinterrupt 107
-#kinterrupt 108
-#kinterrupt 109
-#kinterrupt 110
-#kinterrupt 111
-#kinterrupt 112
-#kinterrupt 113
-#kinterrupt 114
-#kinterrupt 115
-#kinterrupt 116
-#kinterrupt 117
-#kinterrupt 118
-#kinterrupt 119
-#kinterrupt 120
-#kinterrupt 121
-#kinterrupt 122
-#kinterrupt 123
-#kinterrupt 124
-#kinterrupt 125
-#kinterrupt 126
-#kinterrupt 127
-#kinterrupt 128
-#kinterrupt 129
-#kinterrupt 130
-#kinterrupt 131
-#kinterrupt 132
-#kinterrupt 133
-#kinterrupt 134
-#kinterrupt 135
-#kinterrupt 136
-#kinterrupt 137
-#kinterrupt 138
-#kinterrupt 139
-#kinterrupt 140
-#kinterrupt 141
-#kinterrupt 142
-#kinterrupt 143
-#kinterrupt 144
-#kinterrupt 145
-#kinterrupt 146
-#kinterrupt 147
-#kinterrupt 148
-#kinterrupt 149
-#kinterrupt 150
-#kinterrupt 151
-#kinterrupt 152
-#kinterrupt 153
-#kinterrupt 154
-#kinterrupt 155
-#kinterrupt 156
-#kinterrupt 157
-#kinterrupt 158
-#kinterrupt 159
-#kinterrupt 160
-#kinterrupt 161
-#kinterrupt 162
-#kinterrupt 163
-#kinterrupt 164
-#kinterrupt 165
-#kinterrupt 166
-#kinterrupt 167
-#kinterrupt 168
-#kinterrupt 169
-#kinterrupt 170
-#kinterrupt 171
-#kinterrupt 172
-#kinterrupt 173
-#kinterrupt 174
-#kinterrupt 175
-#kinterrupt 176
-#kinterrupt 177
-#kinterrupt 178
-#kinterrupt 179
-#kinterrupt 180
-#kinterrupt 181
-#kinterrupt 182
-#kinterrupt 183
-#kinterrupt 184
-#kinterrupt 185
-#kinterrupt 186
-#kinterrupt 187
-#kinterrupt 188
-#kinterrupt 189
-#kinterrupt 190
-#kinterrupt 191
-#kinterrupt 192
-#kinterrupt 193
-#kinterrupt 194
-#kinterrupt 195
-#kinterrupt 196
-#kinterrupt 197
-#kinterrupt 198
-#kinterrupt 199
-#kinterrupt 200
-#kinterrupt 201
-#kinterrupt 202
-#kinterrupt 203
-#kinterrupt 204
-#kinterrupt 205
-#kinterrupt 206
-#kinterrupt 207
-#kinterrupt 208
-#kinterrupt 209
-#kinterrupt 210
-#kinterrupt 211
-#kinterrupt 212
-#kinterrupt 213
-#kinterrupt 214
-#kinterrupt 215
-#kinterrupt 216
-#kinterrupt 217
-#kinterrupt 218
-#kinterrupt 219
-#kinterrupt 220
-#kinterrupt 221
-#kinterrupt 222
-#kinterrupt 223
-#kinterrupt 224
-#kinterrupt 225
-#kinterrupt 226
-#kinterrupt 227
-#kinterrupt 228
-#kinterrupt 229
-#kinterrupt 230
-#kinterrupt 231
-#kinterrupt 232
-#kinterrupt 233
-#kinterrupt 234
-#kinterrupt 235
-#kinterrupt 236
-#kinterrupt 237
-#kinterrupt 238
-#kinterrupt 239
-#kinterrupt 240
-#kinterrupt 241
-#kinterrupt 242
-#kinterrupt 243
-#kinterrupt 244
-#kinterrupt 245
-#kinterrupt 246
-#kinterrupt 247
-#kinterrupt 248
-#kinterrupt 249
-#kinterrupt 250
-#kinterrupt 251
-#kinterrupt 252
-#kinterrupt 253
-#kinterrupt 254
-#kinterrupt 255
+interrupt 7
+interrupt 8
+interrupt 9
+interrupt 10
+interrupt 11
+interrupt 12
+interrupt 13
+interrupt 14
+interrupt 15
+interrupt 16
+interrupt 17
+interrupt 18
+interrupt 19
+interrupt 20
+interrupt 21
+interrupt 22
+interrupt 23
+interrupt 24
+interrupt 25
+interrupt 26
+interrupt 27
+interrupt 28
+interrupt 29
+interrupt 30
+interrupt 31
+interrupt 32
+interrupt 33
+interrupt 34
+interrupt 35
+interrupt 36
+interrupt 37
+interrupt 38
+interrupt 39
+interrupt 40
+interrupt 41
+interrupt 42
+interrupt 43
+interrupt 44
+interrupt 45
+interrupt 46
+interrupt 47
+interrupt 48
+interrupt 49
+interrupt 50
+interrupt 51
+interrupt 52
+interrupt 53
+interrupt 54
+interrupt 55
+interrupt 56
+interrupt 57
+interrupt 58
+interrupt 59
+interrupt 60
+interrupt 61
+interrupt 62
+interrupt 63
+interrupt 64
+interrupt 65
+interrupt 66
+interrupt 67
+interrupt 68
+interrupt 69
+interrupt 70
+interrupt 71
+interrupt 72
+interrupt 73
+interrupt 74
+interrupt 75
+interrupt 76
+interrupt 77
+interrupt 78
+interrupt 79
+interrupt 80
+interrupt 81
+interrupt 82
+interrupt 83
+interrupt 84
+interrupt 85
+interrupt 86
+interrupt 87
+interrupt 88
+interrupt 89
+interrupt 90
+interrupt 91
+interrupt 92
+interrupt 93
+interrupt 94
+interrupt 95
+interrupt 96
+interrupt 97
+interrupt 98
+interrupt 99
+interrupt 100
+interrupt 101
+interrupt 102
+interrupt 103
+interrupt 104
+interrupt 105
+interrupt 106
+interrupt 107
+interrupt 108
+interrupt 109
+interrupt 110
+interrupt 111
+interrupt 112
+interrupt 113
+interrupt 114
+interrupt 115
+interrupt 116
+interrupt 117
+interrupt 118
+interrupt 119
+interrupt 120
+interrupt 121
+interrupt 122
+interrupt 123
+interrupt 124
+interrupt 125
+interrupt 126
+interrupt 127
+interrupt 128
+interrupt 129
+interrupt 130
+interrupt 131
+interrupt 132
+interrupt 133
+interrupt 134
+interrupt 135
+interrupt 136
+interrupt 137
+interrupt 138
+interrupt 139
+interrupt 140
+interrupt 141
+interrupt 142
+interrupt 143
+interrupt 144
+interrupt 145
+interrupt 146
+interrupt 147
+interrupt 148
+interrupt 149
+interrupt 150
+interrupt 151
+interrupt 152
+interrupt 153
+interrupt 154
+interrupt 155
+interrupt 156
+interrupt 157
+interrupt 158
+interrupt 159
+interrupt 160
+interrupt 161
+interrupt 162
+interrupt 163
+interrupt 164
+interrupt 165
+interrupt 166
+interrupt 167
+interrupt 168
+interrupt 169
+interrupt 170
+interrupt 171
+interrupt 172
+interrupt 173
+interrupt 174
+interrupt 175
+interrupt 176
+interrupt 177
+interrupt 178
+interrupt 179
+interrupt 180
+interrupt 181
+interrupt 182
+interrupt 183
+interrupt 184
+interrupt 185
+interrupt 186
+interrupt 187
+interrupt 188
+interrupt 189
+interrupt 190
+interrupt 191
+interrupt 192
+interrupt 193
+interrupt 194
+interrupt 195
+interrupt 196
+interrupt 197
+interrupt 198
+interrupt 199
+interrupt 200
+interrupt 201
+interrupt 202
+interrupt 203
+interrupt 204
+interrupt 205
+interrupt 206
+interrupt 207
+interrupt 208
+interrupt 209
+interrupt 210
+interrupt 211
+interrupt 212
+interrupt 213
+interrupt 214
+interrupt 215
+interrupt 216
+interrupt 217
+interrupt 218
+interrupt 219
+interrupt 220
+interrupt 221
+interrupt 222
+interrupt 223
+interrupt 224
+interrupt 225
+interrupt 226
+interrupt 227
+interrupt 228
+interrupt 229
+interrupt 230
+interrupt 231
+interrupt 232
+interrupt 233
+interrupt 234
+interrupt 235
+interrupt 236
+interrupt 237
+interrupt 238
+interrupt 239
+interrupt 240
+interrupt 241
+interrupt 242
+interrupt 243
+interrupt 244
+interrupt 245
+interrupt 246
+interrupt 247
+interrupt 248
+interrupt 249
+interrupt 250
+interrupt 251
+interrupt 252
+interrupt 253
+interrupt 254
+interrupt 255
